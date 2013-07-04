@@ -9,7 +9,6 @@ module.exports = function(grunt) {
                 compress: false
             },
             all: {
-                
                 files: {
                     'min.js': 'plain.js'
                 }
@@ -20,19 +19,19 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['jshint', 'uglify', 'htmlescape']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'generatehtml']);
 
-    grunt.registerTask('htmlescape', 'make distribution.', function(){
-        var orig = grunt.file.read('min.js',{encoding: 'utf8'});
+    grunt.registerTask('generatehtml', 'make distribution.', function(){
+	var _ = require('underscore');
+        var src = 
+	    'javascript:'+
+	    grunt.file.read('min.js',{encoding: 'utf8'});
 
-        var encoded = 'javascript:'+
-            orig.
-            replace(/"/g, '&quot;').
-            replace(/&/g, '&amp;').
-            replace(/>/g, '&gt;').
-            replace(/</g, '&lt;');
+	var tmpl = grunt.file.read('index.html.tmpl',{encoding: 'utf8'});
 
-        grunt.file.write('link.txt', encoded, {encoding: 'utf8'});
+	var html = _.template(tmpl, {url: _.escape(src)});
+
+        grunt.file.write('index.html', html, {encoding: 'utf8'});
         
     });
 }
