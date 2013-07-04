@@ -5,7 +5,7 @@ void((function (){
     function _traverse(node){
         var i;
         // self
-        if(node.nodeType == 1/* element */){
+        if(node.nodeType === 1/* element */){
             var attrs = node.attributes;
             for(i=0; i<attrs.length; i++){
                 if(attrs[i].name === 'id'){
@@ -34,7 +34,7 @@ void((function (){
     if(dups.length) {
         alert(dups.join(', '));
     } else {
-        alert("OK");
+        alert('OK');
     }
 
     return false;
