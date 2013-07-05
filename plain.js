@@ -1,5 +1,6 @@
 /* jshint eqnull: true */
 void((function (){
+    // a hash where id and the number of appearance are stored.
     var rec = {};
 
     function _traverse(node){
@@ -25,6 +26,7 @@ void((function (){
     
     _traverse(document);
 
+    // an array where the id which appears twice or more are stored.
     var dups = [];
     for(var key in rec){
         if(rec[key] > 1){
