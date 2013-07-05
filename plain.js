@@ -11,6 +11,7 @@ void((function (){
                 if(attrs[i].name === 'id'){
                     if(rec[attrs[i].value] == null) rec[attrs[i].value] = 0;
                     rec[attrs[i].value]++;
+                    break;
                 }
             }
         }
